@@ -7,6 +7,6 @@ class ArtworkContent < ActiveRecord::Migration[6.0]
       t.float :confidence
       t.float :topicality
 
-      t.timestamps
+    end
   end
 end
