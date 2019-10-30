@@ -10,6 +10,9 @@ class User < ApplicationRecord
     has_many :exhibition_likes
     has_many :exhibitions
 
-    has_many :reviews
+    #uncomment if reviews are implemented:
+    #has_many :reviews
+
+    has_one_attached :photo
 
 end
