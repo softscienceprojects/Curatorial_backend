@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'artwork_contents', to: "artwork_content#index"
   resources :contents
   resources :artworks
   resources :exhibitions
