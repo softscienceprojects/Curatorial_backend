@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_134058) do
+ActiveRecord::Schema.define(version: 2019_10_30_134613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 2019_10_30_134058) do
     t.float "topicality"
     t.index ["artwork_id"], name: "index_artwork_contents_on_artwork_id"
     t.index ["content_id"], name: "index_artwork_contents_on_content_id"
+  end
+
+  create_table "artwork_exhibitions", force: :cascade do |t|
+    t.bigint "exhibition_id"
+    t.bigint "artwork_id"
+    t.index ["artwork_id"], name: "index_artwork_exhibitions_on_artwork_id"
+    t.index ["exhibition_id"], name: "index_artwork_exhibitions_on_exhibition_id"
   end
 
   create_table "artworks", force: :cascade do |t|
