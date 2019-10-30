@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_30_132038) do
+ActiveRecord::Schema.define(version: 2019_10_30_132745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "exhibitions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "summary"
+    t.text "description"
+    t.boolean "public"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_exhibitions_on_user_id"
+  end
 
   create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
@@ -36,4 +46,5 @@ ActiveRecord::Schema.define(version: 2019_10_30_132038) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "exhibitions", "users"
 end
