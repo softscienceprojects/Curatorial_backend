@@ -9,15 +9,13 @@ class Artwork < ApplicationRecord
     def self.get_harvard_images
         #pages 23361 / 10 records per query
         ##LAST QUERY RAN:
-        page = 3
-        while page < 5
-
-            #response = RestClient.get "https://api.harvardartmuseums.org/object?apikey=#{ENV["HARVARD_KEY"]}&q=divison%3AModern%20and%20Contemporary%20Art&page=#{page}"
+        page = 16
+        while page < 20
             response = RestClient.get "https://api.harvardartmuseums.org/object?apikey=#{ENV["HARVARD_KEY"]}&q=divison%3AModern%20and%20Contemporary%20Art&imagecount=1&page=#{page}"
             result = JSON.parse( response )
             # result["records"][0]
             result["records"].each do |record|
-                if record["imagecount"] > 0 && record["images"] != nil && record["images"] != []
+                if record["imagecount"] > 0 && record["images"] != nil && record["images"] != [] && record["people"] != nil
                     artwork = Artwork.new
 
                     artwork["medium"] = record["technique"]
@@ -32,7 +30,8 @@ class Artwork < ApplicationRecord
                     artwork["origin_id"] = record["id"]
 
                     artwork.save!
-                end 
+                    Content.google_cloud_vision(artwork.image_url, artwork.id)
+                end
             end
         page +=1
         end
