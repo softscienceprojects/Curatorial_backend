@@ -9,8 +9,8 @@ class Artwork < ApplicationRecord
     def self.get_harvard_images
         #pages 23361 / 10 records per query
         ##LAST QUERY RAN:
-        page = 16
-        while page < 20
+        page = 50
+        while page < 60
             response = RestClient.get "https://api.harvardartmuseums.org/object?apikey=#{ENV["HARVARD_KEY"]}&q=divison%3AModern%20and%20Contemporary%20Art&imagecount=1&page=#{page}"
             result = JSON.parse( response )
             # result["records"][0]
