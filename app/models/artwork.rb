@@ -5,4 +5,7 @@ class Artwork < ApplicationRecord
 
     has_many :artwork_contents
     has_many :contents, through: :artwork_contents
+
+
+    
 end
