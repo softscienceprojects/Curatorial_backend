@@ -260,6 +260,7 @@ DEPENDENCIES
   google-cloud-storage (~> 1.7)
   google-cloud-vision (~> 0.36.0)
   googleauth
+  jwt (~> 2.2)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)

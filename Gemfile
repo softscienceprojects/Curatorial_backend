@@ -51,3 +51,4 @@ gem 'googleauth'
 gem "google-cloud-storage", "~> 1.7"
 gem "google-cloud-vision", "~> 0.36.0"
 gem "figaro"
+gem "jwt", "~> 2.2"
