@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     def create
         user = User.create(user_params)
         if user.valid?
-            render json: user
+            render json: {token: issue_token({user_id: user.id}), user: user}
         else
-            render json: user.errors.full_messages
+            render json: { errors: user.errors.full_messages }, status: :not_acceptable
         end
     end
 
