@@ -20,7 +20,4 @@ class ContentsController < ApplicationController
         params.require(:content).permit(:description)
     end
 
-    def content_query_params
-        query_params.require(:description).permit(:description)
-    end
 end
