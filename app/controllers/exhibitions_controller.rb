@@ -13,7 +13,11 @@ class ExhibitionsController < ApplicationController
 
     def create
         exhibition = Exhibition.create(exhibition_params)
-        render json: exhibition
+        if (exhibition.valid?)
+            render json: exhibition
+        else
+            render json: exhibition.errors.full_messages
+        end
     end
 
     def update
