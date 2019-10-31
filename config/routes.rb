@@ -5,5 +5,7 @@ Rails.application.routes.draw do
   resources :exhibitions
   resources :users
   post '/signin', to: 'auth#create'
+  post '/validate', to: 'auth#validate'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
