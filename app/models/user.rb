@@ -16,4 +16,8 @@ class User < ApplicationRecord
 
     has_one_attached :photo
 
+     validates :email, uniqueness: true
+     validates :password, presence: true
+     validatees :password_confirmation, presence: true
+
 end
