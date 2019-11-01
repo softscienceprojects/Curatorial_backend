@@ -3,6 +3,7 @@ class ArtworkSerializer < ActiveModel::Serializer
   has_many :contents, through: :artwork_contents
 
   has_many :artworks_contents
+  has_many :exhibitions, through: :artwork_exhibitions
 
   def artworks_contents
     object.artwork_contents.each do |artcontent|
