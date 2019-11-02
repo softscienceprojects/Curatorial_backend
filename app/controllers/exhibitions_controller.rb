@@ -33,6 +33,6 @@ class ExhibitionsController < ApplicationController
     private
 
     def exhibition_params
-        params.require(:exhibition).permit(:user_id, :summary, :description, :public, :photo)
+        params.require(:exhibition).permit(:user_id, :title, :summary, :description, :public, :photo)
     end
 end
