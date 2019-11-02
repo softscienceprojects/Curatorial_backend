@@ -18,6 +18,6 @@ class ArtworkExhibitionsController < ApplicationController
   private
 
   def artwork_exhibitions_params
-    params.require(:artwork_exhibitions).permit(:exhibition_id, :artwork_id)  
+    params.require(:artwork_exhibition).permit(:exhibition_id, :artwork_id)  
   end
 end
