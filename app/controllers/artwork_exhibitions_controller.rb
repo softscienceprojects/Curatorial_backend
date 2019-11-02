@@ -10,6 +10,10 @@ class ArtworkExhibitionsController < ApplicationController
     render json: add_to_show
   end
 
+  def destroy
+    
+  end
+
 
   private
 
