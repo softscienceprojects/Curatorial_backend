@@ -23,6 +23,7 @@ class ExhibitionsController < ApplicationController
     def update
         exhibition = Exhibition.find(params[:id])
         exhibition.update(exhibition_params)
+        render json: exhibition
     end
 
     def destroy
