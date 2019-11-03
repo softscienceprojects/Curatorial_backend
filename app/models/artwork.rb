@@ -6,11 +6,11 @@ class Artwork < ApplicationRecord
     has_many :artwork_contents
     has_many :contents, through: :artwork_contents
 
-    def self.get_harvard_images
+    def self.get_harvard_images(start_page, end_page)
         #pages 23361 / 10 records per query
-        ##LAST QUERY RAN:
-        page = 50
-        while page < 60
+        ##LAST QUERY RAN: page 50, page < 60
+        page = start_page
+        while page < end_page
             response = RestClient.get "https://api.harvardartmuseums.org/object?apikey=#{ENV["HARVARD_KEY"]}&q=divison%3AModern%20and%20Contemporary%20Art&imagecount=1&page=#{page}"
             result = JSON.parse( response )
             # result["records"][0]
