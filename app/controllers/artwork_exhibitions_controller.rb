@@ -7,7 +7,7 @@ class ArtworkExhibitionsController < ApplicationController
   
   def create
     add_to_show = ArtworkExhibition.create!(artwork_exhibitions_params)
-    render json: add_to_show
+    render json: add_to_show, :include => :exhibition #Exhibition.find(params[:artwork_exhibition][:exhibition_id])
   end
 
   def destroy
