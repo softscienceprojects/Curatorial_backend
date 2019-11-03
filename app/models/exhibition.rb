@@ -1,7 +1,7 @@
 class Exhibition < ApplicationRecord
   belongs_to :user
 
-  has_many :artwork_exhibitions
+  has_many :artwork_exhibitions, dependent: :destroy
   has_many :artworks, through: :artwork_exhibitions
 
   has_many :exhibition_likes

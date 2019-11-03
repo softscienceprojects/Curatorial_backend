@@ -1,6 +1,6 @@
 class Artwork < ApplicationRecord
 
-    has_many :artwork_exhibitions
+    has_many :artwork_exhibitions, dependent: :destroy
     has_many :exhibitions, through: :artwork_exhibitions
 
     has_many :artwork_contents
