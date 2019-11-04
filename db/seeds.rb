@@ -7,4 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #start page - end page
-Artwork.get_harvard_images(1, 10)
+# Artwork.get_harvard_images(1, 10)
+
+User.create!(first_name: "Test", last_name: "Testing", email: "e@e.com", password: "e", password_confirmation: "e", biography: "I am a test", public: true)
