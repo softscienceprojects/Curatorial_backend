@@ -2,7 +2,7 @@ class ArtworkExhibitionsController < ApplicationController
 
   def index
     artwork_exhibitions = ArtworkExhibition.all
-    render json: artwork_exhibitions
+    render json: artwork_exhibitions, :include => [:artwork, :exhibition]
   end
   
   def create
@@ -11,7 +11,8 @@ class ArtworkExhibitionsController < ApplicationController
   end
 
   def destroy
-    
+    artwork_to_destroy = ArtworkExhibition.destroy(params[:id])
+    render json: artwork_to_destroy, :include => :artwork
   end
 
 
