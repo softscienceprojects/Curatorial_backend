@@ -1,4 +1,8 @@
 class ExhibitionLikesController < ApplicationController
+  def index
+    exhibition_likes = ExhibitionLike.all
+    render json: exhibition_likes
+  end
   def create
     exhibition_like = ExhibitionLike.create(exhibition_like_params)
     render json: exhibition_like

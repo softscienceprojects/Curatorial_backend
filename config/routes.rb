@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :exhibition_likes, only: [:create, :destroy]
+  resources :exhibition_likes, only: [:index, :create, :destroy]
   resources :artwork_exhibitions, only: [:index, :create, :destroy]
   get 'artwork_contents', to: "artwork_content#index"
   resources :contents, only: [:index]
