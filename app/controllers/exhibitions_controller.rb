@@ -29,6 +29,7 @@ class ExhibitionsController < ApplicationController
     def destroy
         exhibition = Exhibition.find(params[:id])
         exhibition.destroy
+        render json: exhibition
     end
 
     private
