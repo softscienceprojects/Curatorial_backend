@@ -33,6 +33,7 @@ class Artwork < ApplicationRecord
                     Content.google_cloud_vision(artwork.image_url, artwork.id)
                 end
             end
+        sleep 2
         page +=1
         end
     end
