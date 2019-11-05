@@ -16,7 +16,7 @@ class ExhibitionsController < ApplicationController
         if (exhibition.valid?)
             render json: exhibition
         else
-            render json: exhibition.errors.full_messages
+            render json: { errors: exhibition.errors.full_messages }, status: :not_acceptable
         end
     end
 

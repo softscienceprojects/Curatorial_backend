@@ -11,6 +11,7 @@ class Exhibition < ApplicationRecord
 
   has_one_attached :photo
   validates :user_id, presence: true
+  validates :title, presence: true
   validates :summary, presence: true
   
 
