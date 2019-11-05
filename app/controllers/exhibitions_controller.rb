@@ -23,7 +23,11 @@ class ExhibitionsController < ApplicationController
     def update
         exhibition = Exhibition.find(params[:id])
         exhibition.update(exhibition_params)
-        render json: exhibition
+        if (exhibition.valid?)
+            render json: exhibition
+        else
+            render json: { errors: exhibition.errors.full_messages, id: exhibition.id }, status: :not_acceptable
+        end
     end
 
     def destroy
