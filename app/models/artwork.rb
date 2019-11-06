@@ -3,7 +3,7 @@ class Artwork < ApplicationRecord
     has_many :artwork_exhibitions, dependent: :destroy
     has_many :exhibitions, through: :artwork_exhibitions
 
-    has_many :artwork_contents
+    has_many :artwork_contents, dependent: :destroy
     has_many :contents, through: :artwork_contents
 
     def self.get_harvard_images(start_page, end_page)

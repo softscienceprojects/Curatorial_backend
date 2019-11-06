@@ -9,7 +9,7 @@ class User < ApplicationRecord
     has_many :followed_users, through: :active_relationships, source: :followed_user
     has_many :follower_users, through: :passive_relationships, source: :follower_user
 
-    has_many :exhibition_likes
+    has_many :exhibition_likes, dependent: :destroy
     has_many :exhibitions, through: :exhibition_likes
     has_many :exhibitions
 
