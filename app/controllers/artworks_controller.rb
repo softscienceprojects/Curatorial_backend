@@ -1,8 +1,14 @@
 class ArtworksController < ApplicationController
 
     def index
-        artworks = Artwork.all # .limit(3) - for limiting, need to also randomise
+        artworks = Artwork.all 
         render json: artworks
+    end
+
+    def explore
+        offset = rand(Artwork.count)
+        rand_records = Artwork.offset(offset).limit(5)
+        render json: rand_records
     end
 
     def show
