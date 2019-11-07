@@ -1,9 +1,5 @@
 class RelationshipsController < ApplicationController
 
-    def index
-        
-    end
-
     def create
         relationship = Relationship.create!(relationship_params)
         render json: relationship
