@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   resources :artworks
   resources :exhibitions
   resources :users
-  post '/relationships', to: 'relationships#create'
-  delete '/relationships', to: 'relationships#destroy'
+  resources :relationships, only: [:create, :destroy]
   post '/signin', to: 'auth#create'
   post '/signup', to: 'users#create'
   post '/validate', to: 'auth#validate'
