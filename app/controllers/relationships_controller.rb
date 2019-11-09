@@ -6,7 +6,7 @@ class RelationshipsController < ApplicationController
     end
 
     def destroy
-       relationship = relationship.find(params[:id])
+       relationship = Relationship.find(params[:id])
        relationship.destroy
        render json: relationship
     end
