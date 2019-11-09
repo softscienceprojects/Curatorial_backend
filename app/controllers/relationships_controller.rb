@@ -3,7 +3,7 @@ class RelationshipsController < ApplicationController
     def create
         relationship = Relationship.create!(relationship_params)
         render json: relationship.to_json(:include=> {
-            :followed_user => {:only => [:id, :first_name, :last_name, :exhibitions, :biography]}
+            :followed_user => {:only => [:id, :first_name, :last_name, :biography], :include=>[:exhibitions]}
         })
     end
 
@@ -11,7 +11,8 @@ class RelationshipsController < ApplicationController
        relationship = Relationship.find(params[:id])
        relationship.destroy
        render json: relationship.to_json(:include=> {
-           :followed_user => {:only => [:id, :first_name, :last_name, :exhibitions, :biography]}})
+           :followed_user => {:only => [:id, :first_name, :last_name, :biography], :include=>[:exhibitions]}
+        })
     end
 
     private
