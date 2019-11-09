@@ -1,9 +1,10 @@
-# README
+# Curatorial
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Curatorial is an artworks API. It was built with Ruby on Rails and seeded with artworks from the Harvard Art Museum's API at the `/artworks` endpoint. Each artwork was then submitted to the Google Vision API to be analysed for its content. The response from Google Vision has been stored at the `/contents` endpoint. 
 
-Things you may want to cover:
+
+
+## Curatorial_backend
 
 * Ruby version
 
@@ -22,4 +23,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-# Curatorial_backend
+
