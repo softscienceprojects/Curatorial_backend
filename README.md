@@ -9,6 +9,9 @@ There is a sleep timer of 5 seconds between each 'page' on the Harvard Art API s
 
 The database has then been dumped and imported into Heroku. 
 
+## Key User Stories
+
+
 ## Curatorial_backend
 
 * Ruby version
