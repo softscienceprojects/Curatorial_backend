@@ -2,13 +2,17 @@ class RelationshipsController < ApplicationController
 
     def create
         relationship = Relationship.create!(relationship_params)
-        render json: relationship
+        render json: relationship.to_json(:include=> {
+            :followed_user => {:only => [:id, :first_name, :last_name, :biography], :include=>[:exhibitions]}
+        })
     end
 
     def destroy
-       relationship = relationship.find(params[:id])
+       relationship = Relationship.find(params[:id])
        relationship.destroy
-       render json: relationship
+       render json: relationship.to_json(:include=> {
+           :followed_user => {:only => [:id, :first_name, :last_name, :biography], :include=>[:exhibitions]}
+        })
     end
 
     private
