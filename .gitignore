@@ -22,3 +22,9 @@
 /config/master.key
 /config/application.yml
 /.env
+
+# Ignore DB dump files
+curatorial_backend_development_44-2.dump
+curatorial_backend_development_44.yml
+curatorial_backend_development.dump
+curatorial_backend_final-seed.dump
