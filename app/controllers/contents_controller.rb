@@ -5,6 +5,10 @@ class ContentsController < ApplicationController
         render json: contents
     end
 
+    def names
+        render json: Content.all_names
+    end
+
     def search
         content = Content.find_by(description: params[:description])
         if content 
