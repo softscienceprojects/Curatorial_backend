@@ -6,6 +6,10 @@ class Artwork < ApplicationRecord
     has_many :artwork_contents, dependent: :destroy
     has_many :contents, through: :artwork_contents
 
+    def content_names
+        self.contents.map{|c| c.description}
+    end
+
     def self.get_harvard_images(start_page, end_page)
         #pages 23361 / 10 records per query
         ##LAST QUERY RAN: page 800, page < 1000
