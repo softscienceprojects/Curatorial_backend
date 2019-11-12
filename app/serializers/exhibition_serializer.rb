@@ -4,4 +4,5 @@ class ExhibitionSerializer < ActiveModel::Serializer
   belongs_to :user
   has_many :exhibition_likes
   has_many :artworks, through: :artwork_exhibitions
+  has_many :artwork_exhibitions
 end
