@@ -3,6 +3,9 @@ class Content < ApplicationRecord
     has_many :artwork_contents
     has_many :artworks, through: :artwork_contents
 
+    def self.all_names
+        self.all.map{|c| c.description}
+    end
 
     def self.make_content(label, artworkid, score, confidence, topicality)
         content = Content.find_or_create_by(description: label)
