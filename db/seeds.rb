@@ -9,6 +9,6 @@
 #start page - end page
 # Artwork.get_harvard_images(1, 10)
 
-User.destroy_all
+# User.destroy_all
 
-User.create!(first_name: "Test", last_name: "Testing", email: "e@e.com", password: "e", password_confirmation: "e", biography: "I am a test", public: true)
+# User.create!(first_name: "Test", last_name: "Testing", email: "e@e.com", password: "e", password_confirmation: "e", biography: "I am a test", public: true)
