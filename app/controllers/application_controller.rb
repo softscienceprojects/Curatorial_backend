@@ -26,4 +26,11 @@ class ApplicationController < ActionController::API
     def logged_in?
         !!@current_user
     end
+
+    def artsy_token
+        api_url = URI.parse('https://api.artsy.net/api/tokens/xapp_token')
+        response = Net::HTTP.post_form(api_url, client_id: ENV["ARTSY_CLIENT_ID"], client_secret: ENV["ARTSY_CLIENT_SECRET"])
+        xapp_token = JSON.parse(response.body)['token']
+    end
+    
 end
