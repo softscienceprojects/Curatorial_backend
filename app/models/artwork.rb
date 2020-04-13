@@ -60,7 +60,7 @@ class Artwork < ApplicationRecord
         puts api
     end
 
-    def self.get_artsy_images(artsy_artwork_id)
+    def self.get_artsy_image(artsy_artwork_id)
         artwork_ins = Artwork.new
         api = Hyperclient.new('https://api.artsy.net/api') do |api|
             api.headers['Accept'] = 'application/vnd.artsy-v2+json'
@@ -75,25 +75,26 @@ class Artwork < ApplicationRecord
         end
         
         record = api.artwork(id: artsy_artwork_id)
-        artwork_ins["origin_id"] = artsy_id
-        artwork_ins["title"] = record["title"].to_s
-        artwork_ins["medium"] = record["medium"].to_s
-        artwork_ins["description"] = record["exhibition_history"].to_s
-        artwork_ins["collection"] = record["collecting_institution"].to_s
-        artwork_ins["location"] = record["provenance"].to_s
-        artwork_ins["image_copyright"] = record["image_rights"].to_s
-        artwork_ins["permalink"] = record["_links"]["permalink"].to_s
+        # artwork_ins["origin_id"] = artsy_id
+        # artwork_ins["title"] = record["title"].to_s
+        # artwork_ins["medium"] = record["medium"].to_s
+        # artwork_ins["description"] = record["exhibition_history"].to_s
+        # artwork_ins["collection"] = record["collecting_institution"].to_s
+        # artwork_ins["location"] = record["provenance"].to_s
+        # artwork_ins["image_copyright"] = record["image_rights"].to_s
+        # artwork_ins["permalink"] = record["_links"]["permalink"].to_s
 
-        ### t.string "image_url"
-        image_url
+        image_url = record["_links"]["image"].to_s.split(".jpg")
+        # artwork_ins["image_url"] = image_url[0] + "larger.jpg"
         
-        get_artist = record["_links"]["artists"]
-        artist_id = get_artist.to_s.split("=")
-        artist = api.artist(id: artist_id)
-        artwork_ins["artist"] = artist["name"]
+        #get_artist = record["_links"]["artists"]
+        #artist_id = get_artist.to_s.split("=")
+        #artist = api.artist(id: artist_id)
+        # artwork_ins["artist"] = artist["name"]
+        #puts artist["name"]
+
         
-        #puts "#{andy_warhol.name} was born in #{andy_warhol.birthday} in #{andy_warhol.hometown}"
-        artwork.save!
+        # artwork_ins.save!
         # Content.google_cloud_vision(artwork.image_url, artwork.id)
     end
      
