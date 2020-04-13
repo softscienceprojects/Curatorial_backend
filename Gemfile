@@ -11,6 +11,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'dotenv-rails', require: 'dotenv/rails-now', groups: [:development, :test]
 
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -47,8 +48,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #gems that I have added (non-standard)
 gem "active_model_serializers", "~> 0.10.10"
 gem 'rest-client'
-gem 'googleauth'
 gem "google-cloud-storage", "~> 1.7"
 gem "google-cloud-vision", "~> 0.36.0"
 gem "figaro"
 gem "jwt", "~> 2.2"
+
+gem "googleauth", "= 0.11"
+gem "hyperclient", "~> 0.9.1"
+gem "faraday", "~> 0.17.3"
