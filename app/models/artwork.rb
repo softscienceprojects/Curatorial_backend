@@ -60,7 +60,7 @@ class Artwork < ApplicationRecord
         puts api
     end
 
-    def self.call_artsy(artsy_artwork_id)
+    def self.get_artsy_images(artsy_artwork_id)
         artwork_ins = Artwork.new
         api = Hyperclient.new('https://api.artsy.net/api') do |api|
             api.headers['Accept'] = 'application/vnd.artsy-v2+json'
@@ -73,7 +73,7 @@ class Artwork < ApplicationRecord
               conn.adapter :net_http
             end
         end
-        #andy_warhol = api.artist(id: 'andy-warhol')
+        
         record = api.artwork(id: artsy_artwork_id)
         artwork_ins["origin_id"] = artsy_id
         artwork_ins["title"] = record["title"].to_s
@@ -93,28 +93,8 @@ class Artwork < ApplicationRecord
         artwork_ins["artist"] = artist["name"]
         
         #puts "#{andy_warhol.name} was born in #{andy_warhol.birthday} in #{andy_warhol.hometown}"
-        # return ...
-    end
-
-
-    def self.get_artsy_images(artsy_id)
-        artwork = Artwork.new # ************
-        artwork.call_artsy(slug)
-
-        ##
-        #artwork["image_url"] = record["_links"]["image"]["href"] 
-          ## saves with {image_version}
-        #artwork["artist"] = record["_links"]["artists"]["href"]
-         ## need to get ID off the end and do another call
-         ## "artists": {
-         ##    "href": "https://api.artsy.net/api/artists?artwork_id=4d8b92ee4eb68a1b2c0009ab"
-         ##    }
-         ## then
-         ## artist["_embedded"]["artists"][0]["name"]
         artwork.save!
         # Content.google_cloud_vision(artwork.image_url, artwork.id)
-        sleep 5
-        # record["_links"]["next"]["href"]
     end
      
 
