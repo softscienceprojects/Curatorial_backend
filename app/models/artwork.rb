@@ -98,7 +98,8 @@ class Artwork < ApplicationRecord
         image_test_url = "https://res.cloudinary.com/streethub/image/upload/w_690,f_auto,q_auto:eco,dpr_auto,c_pad,b_white/v1576063261/brand/5bdad3abba85830003b5b07c/r5zdoyepkp2pqm7umegh.jpg"
         s3.put_object({bucket: ENV["AWS_BUCKET"], body: open(image_test_url), key: "cacti.jpg"})
 
-        ## artwork_ins["image_url"] = (artsy_artwork_id + ".jpg",open(image_url[0] + "larger.jpg")
+        # s3.put_object({bucket: ENV["AWS_BUCKET"], body: open(image_url[0] + "larger.jpg"), key: artsy_artwork_id + ".jpg"})
+        ## artwork_ins["image_url"] = ?
         
         # Content.google_cloud_vision(artwork.image_url, artwork.id)
        
