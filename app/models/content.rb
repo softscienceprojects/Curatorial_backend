@@ -15,13 +15,12 @@ class Content < ApplicationRecord
 
     require "google/cloud/vision"
 
-    def self.google_cloud_vision #(file, artworkid)
+    def self.google_cloud_vision(file, artworkid)
         #storage = Google::Cloud::Storage.new project: ENV["GOOGLE_PROJECT_ID"], keyfile: ENV["GOOGLE_KEY_FILE"]
         image_annotator = Google::Cloud::Vision::ImageAnnotator.new
         #image_annotator = Google::Cloud::Vision::ImageAnnotator.new(credentials: JSON.parse(ENV.fetch("GOOGLE_APPLICATION_CREDENTIALS")))
-        response = image_annotator.label_detection image: "https://d32dm0rphc51dk.cloudfront.net/NOpIAwQa-3r51Cg9qXKbfA/medium.jpg" #file
-        #response.responses.each{|res|res.label_annotations.each{|label|Content.make_content(label.description.downcase, artworkid, label.score, label.confidence, label.topicality)}}
-        response.responses.each{|res|res.label_annotations.each{|label| puts label.description}}
+        response = image_annotator.label_detection image: file
+        response.responses.each{|res|res.label_annotations.each{|label| Content.make_content(label.description.downcase, artworkid, label.score, label.confidence, label.topicality)}}
     end
 
 

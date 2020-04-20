@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2020_04_06_195352) do
     t.string "image_url"
     t.string "image_copyright"
     t.string "permalink"
-    t.integer "origin_id"
+    t.string "origin_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

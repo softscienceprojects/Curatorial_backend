@@ -57,59 +57,45 @@ class Artwork < ApplicationRecord
     require "aws-sdk-s3"
     require "open-uri"
 
-    def self.get_artsy_image(artsy_artwork_id)
-        # artwork_ins = Artwork.new
-        # api = Hyperclient.new('https://api.artsy.net/api') do |api|
-        #     api.headers['Accept'] = 'application/vnd.artsy-v2+json'
-        #     api.headers['X-Xapp-Token'] = ENV["ARTSY_TOKEN"]
-        #     api.connection(default: false) do |conn|
-        #       conn.use FaradayMiddleware::FollowRedirects
-        #       conn.use Faraday::Response::RaiseError
-        #       conn.request :json
-        #       conn.response :json, content_type: /\bjson$/
-        #       conn.adapter :net_http
-        #     end
-        # end
-        
-        # record = api.artwork(id: artsy_artwork_id)
-        # artwork_ins["origin_id"] = artsy_id
-        # artwork_ins["title"] = record["title"].to_s
-        # artwork_ins["medium"] = record["medium"].to_s
-        # artwork_ins["description"] = record["exhibition_history"].to_s
-        # artwork_ins["collection"] = record["collecting_institution"].to_s
-        # artwork_ins["location"] = record["provenance"].to_s
-        # artwork_ins["image_copyright"] = record["image_rights"].to_s
-        # artwork_ins["permalink"] = record["_links"]["permalink"].to_s
+    def self.get_artsy_image(artsy_artwork_id, artist_name)
+        artwork_ins = Artwork.new
+        artwork_ins["origin_id"] = artsy_artwork_id.to_s
+        artwork_ins["artist"] = artist_name
 
-        # image_url = record["_links"]["image"].to_s.split(".jpg")
-        # image_url[0] + "larger.jpg"
+        api = Hyperclient.new('https://api.artsy.net/api') do |api|
+            api.headers['Accept'] = 'application/vnd.artsy-v2+json'
+            api.headers['X-Xapp-Token'] = ENV["ARTSY_TOKEN"]
+            api.connection(default: false) do |conn|
+              conn.use FaradayMiddleware::FollowRedirects
+              conn.use Faraday::Response::RaiseError
+              conn.request :json
+              conn.response :json, content_type: /\bjson$/
+              conn.adapter :net_http
+            end
+        end
+        
+        record = api.artwork(id: artsy_artwork_id)
+        
+        artwork_ins["title"] = record["title"].to_s
+        artwork_ins["medium"] = record["medium"].to_s
+        artwork_ins["description"] = record["exhibition_history"].to_s
+        artwork_ins["collection"] = record["collecting_institution"].to_s
+        artwork_ins["location"] = record["provenance"].to_s
+        artwork_ins["image_copyright"] = record["image_rights"].to_s
+        artwork_ins["permalink"] = record["_links"]["permalink"].to_s
+        
+        image_url = record["_links"]["image"].to_s.split(".jpg")
         
         s3 = Aws::S3::Client.new(
             region: ENV['AWS_REGION'],
             access_key_id: ENV['AWS_ACCESS_KEY_ID'],
             secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
         )
-           
-        ## resp = s3.list_buckets
-        ##     resp.buckets.each do |b|
-        ##         puts b.name
-        ##     end
-
-        image_test_url = "https://res.cloudinary.com/streethub/image/upload/w_690,f_auto,q_auto:eco,dpr_auto,c_pad,b_white/v1576063261/brand/5bdad3abba85830003b5b07c/r5zdoyepkp2pqm7umegh.jpg"
-        s3.put_object({bucket: ENV["AWS_BUCKET"], body: open(image_test_url), key: "cacti.jpg"})
-
-        # s3.put_object({bucket: ENV["AWS_BUCKET"], body: open(image_url[0] + "larger.jpg"), key: artsy_artwork_id + ".jpg"})
-        ## artwork_ins["image_url"] = ?
         
-        # Content.google_cloud_vision(artwork.image_url, artwork.id)
-       
-        #get_artist = record["_links"]["artists"]
-        #artist_id = get_artist.to_s.split("=")
-        #artist = api.artist(id: artist_id)
-        # artwork_ins["artist"] = artist["name"]
-        #puts artist["name"]
-        
-        # artwork_ins.save!
+        s3.put_object({bucket: ENV["AWS_BUCKET"], body: open(image_url[0] + "larger.jpg"), key: artsy_artwork_id + ".jpg"})
+        artwork_ins["image_url"] = "https://curatorialimages.s3.eu-west-2.amazonaws.com/" + artsy_artwork_id + ".jpg"
+        artwork_ins.save!
+        Content.google_cloud_vision(image_url[0] + "larger.jpg", artwork_ins.id)
     end
      
 

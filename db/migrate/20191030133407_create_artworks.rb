@@ -10,7 +10,7 @@ class CreateArtworks < ActiveRecord::Migration[6.0]
       t.string :image_url
       t.string :image_copyright
       t.string :permalink
-      t.integer :origin_id
+      t.string :origin_id
 
       t.timestamps
     end
